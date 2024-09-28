@@ -14,6 +14,10 @@
   }
 }
 
+.raleway {
+  font-family: "Raleway", sans-serif;
+  font-weight: 400; /* Change this to whatever weight you need */
+}
 body {
   color: var(--foreground);
   background: var(--background);
