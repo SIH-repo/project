@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 
 require('dotenv').config();
 
-async function sendEmail(userEmail,subject,text) {
+async function sendEmail(newAlert,emailList) {
 
     let transporter = nodemailer.createTransport({
     
@@ -10,17 +10,20 @@ async function sendEmail(userEmail,subject,text) {
         auth: {
             user: process.env.EMAIL,
             pass: process.env.PASSWORD
+        },
+        tls: {
+            rejectUnauthorized: false 
         }
     });
     
-    let mailOptions = {
+   
+    const mailOptions = {
         from: process.env.EMAIL,
-        to: userEmail,
-        subject: subject,
-        text: text
+        to: emailList.join(','),  
+        subject: `New Alert in ${newAlert.alertTitle}: ${newAlert.level} (Data: ${newAlert.data})`,
+        text: newAlert.description
     };
- 
-     transporter.sendMail(mailOptions, function(error, info){
+      transporter.sendMail(mailOptions, function(error, info){
         if (error) {
             console.log("failed",error)
         } else {

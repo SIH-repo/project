@@ -99,7 +99,7 @@ app.use(session({
         maxAge: 14 * 24 * 60 * 60 * 1000, 
         secure: false,  
         httpOnly: true  
-}));
+}}));
 
 // Initialize Passport and restore authentication state
 app.use(passport.initialize());
